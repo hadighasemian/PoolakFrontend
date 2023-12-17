@@ -1,24 +1,68 @@
-import logo from './logo.svg';
 import './App.css';
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import Layout from "./Layout";
+import Home from "./Apps/Home/Home";
+import AuthLayout from "./Apps/Auth/AuthLayout";
+import NoPage from "./Apps/NoPage/NoPage";
+import Splash from "./Apps/Splash/Splash";
+import {SWRConfig} from "swr/_internal";
+import HomeLayout from "./Apps/Home/Layout/HomeLayout";
+import GroupLayout from "./Apps/Group/GroupLayout";
+import Group from "./Apps/Group/Group";
+import AddMember from "./Apps/Group/Tabs/Member/AddMember";
+import EditProfile from "./Apps/Group/Tabs/Profile/EditProfile";
+import ChangePassword from "./Apps/Group/Tabs/Profile/ChangePassword";
+import AddLoan from "./Apps/Group/Tabs/Loan/AddLoan";
+import 'moment/locale/fa';
+import { AdapterDateFnsJalali } from '@mui/x-date-pickers/AdapterDateFnsJalali';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import AddTransaction from "./Apps/Group/Tabs/Transaction/AddTransaction";
+import AddPayment from "./Apps/Group/Tabs/Loan/Payment/AddPayment";
+import Auth from "./Apps/Auth/Auth";
+import MobileCode from "./Apps/Auth/MobileCode/MobileCode";
+
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+
+    return (
+        <LocalizationProvider dateAdapter={AdapterDateFnsJalali}>
+
+        <SWRConfig
+            value={{
+                refreshInterval: 0,
+                // dedupingInterval: 100,
+                // refreshInterval: 100,
+                // fallback: { a: 1, b: 1 },
+            }}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+              <BrowserRouter>
+                  <Routes>
+                      <Route path="/" element={<Layout  />}>
+                          <Route index element={<Splash />} />
+                          <Route path='/Home' element={<HomeLayout />} >
+                              <Route index element={<Home />} />
+                              <Route path='LoanGroup' element={<GroupLayout />} >
+                                  <Route path=":id" element={<Group />} />
+                                  <Route path="AddMember" element={<AddMember />} />
+                                  <Route path="EditProfile/:group_id" element={<EditProfile />} />
+                                  <Route path="ChangePassword/:group_id" element={<ChangePassword />} />
+                                  <Route path="AddLoan/:group_id" element={<AddLoan />} />
+                                  <Route path="AddTransaction/:loan_group_id" element={<AddTransaction />} />
+                                  <Route path="AddPayment/:group_id" element={<AddPayment />} />
+                              </Route>
+                          </Route>
+                          <Route path="Auth" element={<AuthLayout />} >
+                              <Route index element={<Auth />} />
+                              <Route path="MobileCode/" element={<MobileCode/>} />
+                              {/*<Route path="ForgetPassword" element={<Mobile />} />*/}
+                          </Route>
+                          <Route path="*" element={<NoPage />} />
+                      </Route>
+                  </Routes>
+              </BrowserRouter>
+        </SWRConfig>
+        </LocalizationProvider>
   );
 }
 
