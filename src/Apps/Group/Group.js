@@ -53,7 +53,7 @@ function Group() {
 
     };
     return (
-        <StatusFrame className=' h-100  ' loading={loading} error={error}>
+        <StatusFrame className='h-100' loading={loading} error={error}>
             <div className={' h-100'}>
                 <div className=' tab-frame overflow-auto'>
                     {renderContent()}

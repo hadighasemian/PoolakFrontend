@@ -1,5 +1,5 @@
 import MemberRow from "./MemberRow";
-import {digitsEnToFa} from "@persian-tools/persian-tools";
+import {addCommas, digitsEnToFa} from "@persian-tools/persian-tools";
 import loanGroupSummarise from "../../../../DataManagers/LoanGroupSummarise";
 import haveAccess from "../../../../Resource/ACL/HaveAccess";
 import getAddress from "../../../../Resource/Routing/Addresses/getAddress";
@@ -19,7 +19,7 @@ function Members({loanGroup}) {
                     <div className="d-flex  flex-row justify-content-evenly ">
                         <span className='  text-dark border-1'>
                             موجودی:
-                            {digitsEnToFa(cash?cash:0)}
+                            {digitsEnToFa(addCommas(cash?cash:0))}
                         </span>
                         <span className=' text-dark border-1'>
                             {/*تعداد*/}
@@ -29,7 +29,7 @@ function Members({loanGroup}) {
                             {/*    &nbsp;*/}
                                 وام به مجموع مبالغ:
                                 &nbsp;
-                                {digitsEnToFa(loan?loan:0)}
+                                {digitsEnToFa(addCommas(loan?loan:0))}
                         </span>
                     </div>
                 </div>
