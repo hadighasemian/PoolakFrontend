@@ -23,15 +23,15 @@ function Group() {
 //todo
     const { loanGroup, loading, error } = GetLoanGroup(id)
 
-    useEffect(()=>{
-        dispatch(setClientRole(UnpackGroupAuthRole(loanGroup)))
-        // console.log(loanGroup)
-        // console.log(UnpackGroupAuthRole(loanGroup))
-    },[loanGroup])
+    // useEffect(()=>{
+    //     dispatch(setClientRole(UnpackGroupAuthRole(loanGroup)))
+    //     // console.log(loanGroup)
+    //     // console.log(UnpackGroupAuthRole(loanGroup))
+    // },[loanGroup])
 
-    const handleChange = (event, newValue) => {
-        changeHomeTab(newValue);
-    };
+    // const handleChange = (event, newValue) => {
+    //     changeHomeTab(newValue);
+    // };
 
     const changeHomeTab = (tab) => {
         dispatch(setHomeTab(tab))

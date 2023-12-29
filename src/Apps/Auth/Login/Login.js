@@ -20,6 +20,7 @@ function Login() {
     const dispatch = useDispatch()
     const navigate = useNavigate();
     const axiosInstance = getConfiguredAxis(AuthModel());
+
     useEffect(()=>{
         if(login){
             navigate('/Home', { replace: true });
@@ -44,7 +45,7 @@ function Login() {
         }
 
         // using yup single line
-        if (yup.string().min(8).max(12).isValidSync(values.password)) {
+        if (values.password.length<8) {
             errors.password = i18next.t('Required');
         }
         return errors;

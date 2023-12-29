@@ -1,7 +1,10 @@
 export default {
-    // 'base':'http://127.0.0.1/loan/back/public',
-    'base':'http://back.poolak.salam-raya.ir',
+    'base':'http://127.0.0.1/loan/back/public',
+    // 'base':'http://back.poolak.salam-raya.ir',
+    // 'base':'http://poolak.salam-raya.ir/backend',
     // 'base':'http://salam-raya.ir',
+    'edit_profile':'api/profile/editProfile',
+    'change_password':'api/profile/changePassword',
     'register':'api/auth/register/register',
     'mobile':'api/auth/register/mobile',
     'confirm_code':'api/auth/register/confirm_code',

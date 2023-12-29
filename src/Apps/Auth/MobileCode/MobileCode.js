@@ -35,9 +35,6 @@ function MobileCode() {
                 {renderPage()}
             </div>
         </div>
-
     )
-
-
 }
 export default MobileCode;

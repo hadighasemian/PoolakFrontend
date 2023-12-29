@@ -9,8 +9,7 @@ import {useRef} from "react";
 import {digitsEnToFa} from "@persian-tools/persian-tools";
 import authModel from "../../../Resource/DB/Models/Auth/AuthModel";
 import './NavBar.css'
-
-function NavBar() {
+import ArchitectureIcon from '@mui/icons-material/Architecture';function NavBar() {
     const dispatch = useDispatch()
     const navigate = useNavigate();
     const closeBtn = useRef(null);
@@ -43,12 +42,17 @@ function NavBar() {
 
     return(
         <nav className="navbar  bg-body-tertiary  m-0 p-0 ">
-            <div className="container-fluid NavBar back-prime1 p-2 shadow-sm">
+            <div className="container-fluid NavBar back-prime1 p-2 shadow-lg">
                 <button className="navbar-toggler border-0" type="button" data-bs-toggle="offcanvas"
                         data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                     <i className="bi bi-three-dots-vertical"></i>
-                    <span className='px-2 h5'>{i18next.t('App_name')}</span>
+
+                    <span className='px-2 h5'>
+                        {/*<HeaderLogo className=""/>*/}
+                        {i18next.t('App_name')}
+                    </span>
                 </button>
+
                 <div className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasNavbar"
                      aria-labelledby="offcanvasNavbarLabel">
                     <div className="offcanvas-header">
@@ -83,22 +87,11 @@ function NavBar() {
                                 </Link>
                             </li>
                             {/*<li className="nav-item">*/}
-                            {/*    <Link to={getAddress('Home')} onClick={closeOffCanvas} className="nav-link" href="src/Apps/Home/Layout/HomeLayout#">*/}
-                            {/*        <HomeIcon className='mx-2'/>ویرایش اطل*/}
+                            {/*    <Link to={getAddress('About')} onClick={closeOffCanvas} className="nav-link" href="src/Apps/Home/Layout/HomeLayout#">*/}
+                            {/*        <ArchitectureIcon className='mx-2'/>درباره ما*/}
                             {/*    </Link>*/}
                             {/*</li>*/}
 
-                            {/*<li className="nav-item dropdown">*/}
-                            {/*    <a className="nav-link dropdown-toggle" href="src/Apps/Home/Layout/HomeLayout#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>*/}
-                            {/*    <ul className="dropdown-menu">*/}
-                            {/*        <li><a className="dropdown-item" href="src/Apps/Home/Layout/HomeLayout#">Action</a></li>*/}
-                            {/*        <li><a className="dropdown-item" href="src/Apps/Home/Layout/HomeLayout#">Another action</a></li>*/}
-                            {/*        <li>*/}
-                            {/*            <hr className="dropdown-divider"/>*/}
-                            {/*        </li>*/}
-                            {/*        <li><a className="dropdown-item" href="src/Apps/Home/Layout/HomeLayout#">Something else here</a></li>*/}
-                            {/*    </ul>*/}
-                            {/*</li>*/}
                         </ul>
                     </div>
                 </div>

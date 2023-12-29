@@ -8,18 +8,12 @@ export const authSlice = createSlice({
                 login: false,
                 token: '',
             },
-            clientRole:[
-            ],
-            user:
-                {
-                    id: 1,
-                    name: "هادی قاسمیان قطب آباد",
-                    mobile: "09133926148",
-                    created_at: "2023-06-15T14:40:58.000000Z",
-                    updated_at: "2023-06-15T14:40:58.000000Z",
-                    success: true,
-                    messages: ""
-                }
+            clientRole: {
+
+            },
+            user: {
+
+            }
         }
     },
     reducers: {
@@ -29,12 +23,18 @@ export const authSlice = createSlice({
         setClientRole: (state, action) => {
             // console.log('action.payload',action.payload)
             state.clientRole = action.payload
+            // state.auth.clientRole = action.payload
         },
+        setAuthUser: (state, action) => {
+            // console.log('action.payload',action.payload)
+            state.auth.user = action.payload
+        },
+
     }
 })
 
 
 // Action creators are generated for each case reducer function
-export const { setAuthState,setClientRole } = authSlice.actions
+export const { setAuthState,setClientRole,setAuthUser } = authSlice.actions
 
 export default authSlice.reducer

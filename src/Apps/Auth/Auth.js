@@ -33,19 +33,6 @@ function Auth() {
             <div className="row mb-5">
                 <LoginLogo/>
             </div>
-            {/*<div className=" justify-content-center d-flex flex-row">*/}
-            {/*    <ToggleButtonGroup className='ltr-direction sansFont'*/}
-            {/*                       color="primary"*/}
-            {/*                       value={pageState}*/}
-            {/*                       exclusive*/}
-            {/*                       onChange={handleChange}*/}
-            {/*                       aria-label="Platform">*/}
-            {/*        <ToggleButton className='sansFont' value='login'>*/}
-            {/*            ورود*/}
-            {/*        </ToggleButton>*/}
-            {/*        <ToggleButton className='sansFont' value='register'>ثبت نام</ToggleButton>*/}
-            {/*    </ToggleButtonGroup>*/}
-            {/*</div>*/}
             <div className='row p-1 h-100 '>
                 <Login />
             </div>

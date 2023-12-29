@@ -10,6 +10,7 @@ function GetLoanGroup(id) {
     const dispatch = useDispatch()
     const { response, loading, error } = useSwrPost(URLs['loanGroup'],
         {'loan_group_id':id}, createSwrConf(false,5000));
+    // console.log(response?.data?.data?.loanGroup)
     let loanGroup = getLoanGroupFromResponse(response);
     dispatch(setClientRole(UnpackGroupAuthRole(loanGroup)))
     return { loanGroup, loading, error }

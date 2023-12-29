@@ -10,7 +10,6 @@ function HomeLayout() {
             <div className=" p-0 m-0 home_frame    back3">
                 <Outlet/>
             </div>
-
         </div>
     );
 }

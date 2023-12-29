@@ -18,15 +18,18 @@ function Mobile({setAuthData,setPageState}) {
         const errors = {};
 
         if (!values.mobile) {
-            errors.mobile = 'Mobile number is required';
+            errors.mobile = 'شماره همراه را وارد  کنید.';
         } else if (!/^\d{11}$/.test(values.mobile)) {
             errors.mobile = 'شماره همراه 11 رقمه قربون شکلت برم من!';
+        }else if (!values.name) {
+            errors.name = 'نام را وارد کنید';
         }
 
         return errors;
     }
     const formik = useFormik({
         initialValues: {
+            name:'',
             mobile:'',
         },
         validate,
@@ -57,9 +60,28 @@ function Mobile({setAuthData,setPageState}) {
                     <div className='col'>
                         <form onSubmit={formik.handleSubmit}>
                             <div className="form-group mt-2">
-                                <label htmlFor="mobile">شماره همراه:</label>
+                                <label htmlFor="name">نام و نام خانوادگی:</label>
                                 <input
                                     type="text"
+                                    id="name"
+                                    name="name"
+                                    className={`form-control ${
+                                        formik.touched.name && formik.errors.name
+                                            ? 'is-invalid'
+                                            : ''
+                                    }`}
+                                    onChange={formik.handleChange}
+                                    onBlur={formik.handleBlur}
+                                    value={formik.values.name}
+                                />
+                                {formik.touched.name && formik.errors.name && (
+                                    <div className="invalid-feedback">{formik.errors.name}</div>
+                                )}
+                            </div>
+                            <div className="form-group mt-2">
+                                <label htmlFor="mobile">شماره همراه:</label>
+                                <input
+                                    type="tel"
                                     id="mobile"
                                     name="mobile"
                                     className={`form-control ${
@@ -75,6 +97,7 @@ function Mobile({setAuthData,setPageState}) {
                                     <div className="invalid-feedback">{formik.errors.mobile}</div>
                                 )}
                             </div>
+
                             <div className="d-flex flex-row m-3">
                                 <LoadingBtn loading={loading}></LoadingBtn>
                             </div>
