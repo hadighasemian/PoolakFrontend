@@ -24,6 +24,9 @@ function TransactionRow({transaction,user,loan_group_id}) {
             <DeleteTransactionDialog  transaction={trans} open={open} handleClose={toggleDeleteDialog}/>
             <div className="card-header">
                 <span >{trans.name}</span>
+                <span className='small fw-bold text-dark'> {user.name}</span>
+                <span className=' float-start badge bg-secondary'><small>{digitsEnToFa(user.mobile)}</small> </span>
+
             </div>
             <div className="card-body">
                 <span className='mx-2'>

@@ -28,23 +28,28 @@ function MemberRow({member}) {
         setOpenCheckout(!openCheckout)
     }
     const {loansAmountSum,paysValueSum,transactionsValueSum,loanNumber} = MemberSum(member)
+    // console.log(member?.role?.title==='admin')
     return(
         <>
             <DeleteMemberDialog  member={member} open={openDelete} handleClose={toggleDeleteDialog}/>
             <CheckoutMemberDialog  member={member} open={openCheckout} handleClose={toggleCheckoutDialog}/>
             <div className="card my-1" >
                 <div className="card-header">
-                    {haveAccess()?<KeyIcon className='text-prime1'></KeyIcon>:null}
+                    {(member?.role?.title==='admin')?<KeyIcon className='text-prime1'></KeyIcon>:null}
                     <span className='small fw-bold text-dark'> {member.user.name}</span>
                     <span className=' float-start badge bg-secondary  '><small>{digitsEnToFa(member.user.mobile)}</small> </span>
+
                 </div>
 
                 <ul className="list-group list-group-flush px-1">
-                    <li className="list-group-item d-flex flex-row justify-content-around">
+                    <li className="list-group-item d-flex flex-row ">
                         <small>
                             موجودی:
                             {digitsEnToFa(addCommas(transactionsValueSum))}
                         </small>
+
+                    </li>
+                    <li className="list-group-item d-flex flex-row">
                         <small>
                             تعداد
                             &nbsp;
@@ -54,14 +59,15 @@ function MemberRow({member}) {
                             &nbsp;
                             {digitsEnToFa(addCommas(loansAmountSum))}
                         </small>
-
                     </li>
-                    <li className="list-group-item d-flex flex-row justify-content-around">
+                    <li className="list-group-item d-flex flex-row ">
                         <small >
                             مبلغ پرداختی وام ها:
                             &nbsp;
                             {digitsEnToFa(addCommas(paysValueSum))}
                         </small>
+                    </li>
+                    <li className="list-group-item d-flex flex-row ">
                         <small>
                             امتیاز وام:
                             <span className="badge bg-secondary-subtle text-dark">
@@ -69,7 +75,6 @@ function MemberRow({member}) {
                             </span>
 
                         </small>
-
                     </li>
 
                 </ul>

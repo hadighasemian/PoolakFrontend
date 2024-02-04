@@ -71,8 +71,8 @@ import ArchitectureIcon from '@mui/icons-material/Architecture';function NavBar(
                             <span className='mt-2 '>{digitsEnToFa(user.mobile)}</span>
                         </div>
                         <div className="col-12 px-1 d-flex flex-row justify-content-between mt-3" >
-                            <Link className='btn small  mx-1 w-50 border-0 btn-outline-dark ' to={getAddress('EditProfile')}>ویرایش اطلاعات</Link>
-                            <Link className='btn small mx-1 w-50 border-0 btn-outline-dark' to={getAddress('ChangePassword')}>تغییر پسورد</Link>
+                            <Link onClick={closeOffCanvas} className='btn small  mx-1 w-50 border-0 btn-outline-dark ' to={getAddress('EditProfile')}>ویرایش اطلاعات</Link>
+                            <Link onClick={closeOffCanvas} className='btn small mx-1 w-50 border-0 btn-outline-dark' to={getAddress('ChangePassword')}>تغییر پسورد</Link>
                         </div>
                         <div className='w-100 line'></div>
                         <ul className="navbar-nav justify-content-end flex-grow-1 pt-3 pe-3">

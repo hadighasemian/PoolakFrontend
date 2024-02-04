@@ -30,15 +30,19 @@ function LoanRow({lon,user,loan_group_id}) {
         value: 0,
         date: new Date(),
     }
+    // console.log(user.mobile)
     return(
         <div onClick={showLoan} className='card shadow-sm my-2 border-0 mx-0 '>
             <DeleteLoanDialog loan={loan} open={deleteDialogOpen} handleClose={toggleDialog}/>
             <div className="card-header">
                 <div className="row p-2 text-dark position-relative">
                     <div className="col-8">
-                        <span className='small badge bg-light text-dark'>({loan?.name})</span>
-                        {digitsEnToFa(addCommas(sum))}/{digitsEnToFa(addCommas(loan.amount))}
-                        <span className='mx-1'>تومان</span>
+                        <span className='small badge bg-light text-dark'>
+                            {loan?.name}
+                            <span className="badge bg-secondary-subtle text-dark p-1 mx-1">
+                                {user.mobile}
+                            </span>
+                        </span>
                         <span className='d-block  text-end text-muted badge'>
                             {digitsEnToFa(moment(loan.date).locale('fa').format('dddd, LL'))}
                         </span>
@@ -54,6 +58,10 @@ function LoanRow({lon,user,loan_group_id}) {
                             </button>
                         </div>:""
                     }
+                    <div className='col-12 text-center'>
+                        {digitsEnToFa(addCommas(sum))} - {digitsEnToFa(addCommas(loan.amount))}
+
+                    </div>
                     <div className='col-12'>
                         <LoanLinearProgress paid={paid} time={time}/>
                     </div>
