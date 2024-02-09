@@ -7,15 +7,15 @@ import {useSnackbar} from "notistack";
 import UnpackErrors from "../../../../Resource/Net/Error/UnpackErrors";
 import URLs from "../../../../Resource/Net/URLs";
 
-function DeleteLoanDialog({open,handleClose,loan}) {
+function TerminatingLoanDialog({open,handleClose,loan}) {
     const axiosInstance = getConfiguredAxis(AuthModel());
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
     const { enqueueSnackbar } = useSnackbar();
 
-    const deleteLoan = () => {
+    const terminateLoan = () => {
         setLoading(true)
-        axiosInstance.post(URLs['delete_loan'],loan).then(function (response) {
+        axiosInstance.post(URLs['terminate_loan'],loan).then(function (response) {
             if (response?.data?.state?.success){
                 handleClose()
             }
@@ -33,11 +33,11 @@ function DeleteLoanDialog({open,handleClose,loan}) {
         <Dialog className='rtl-direction sansFont' maxWidth='xs' open={open} onClose={handleClose}>
             <div className="card">
                 <div className="card-header back-prime1">
-                    حذف وام
+                    مختومه کردن وام
                 </div>
                 <div className="card-body">
                         <div className='col'>
-                            آیا مایل به حذف وام
+                            آیا مایل به اختتام وام
                             &nbsp;{loan.name}&nbsp;
                             به مبلغ
                             &nbsp;{loan.amount}&nbsp;
@@ -45,7 +45,7 @@ function DeleteLoanDialog({open,handleClose,loan}) {
                         </div>
                 </div>
                 <div className="card-footer d-flex justify-content-end">
-                    <button onClick={deleteLoan} className='btn btn-prime1 mx-2'>بله</button>
+                    <button onClick={terminateLoan} className='btn btn-prime1 mx-2'>بله</button>
                     <button onClick={handleClose} className='btn btn-danger mx-1'>خیر</button>
                 </div>
 
@@ -53,4 +53,4 @@ function DeleteLoanDialog({open,handleClose,loan}) {
         </Dialog>
     );
 }
-export default DeleteLoanDialog;
+export default TerminatingLoanDialog;

@@ -3,6 +3,8 @@ import TransactionRow from "./TransactionRow";
 import haveAccess from "../../../../Resource/ACL/HaveAccess";
 import Fab from "../../../../Resource/Component/Fab";
 import getAddress from "../../../../Resource/Routing/Addresses/getAddress";
+import styled from "styled-components";
+import React from "react";
 
 function Transaction({loanGroup}) {
     const transaction =  {
@@ -13,7 +15,10 @@ function Transaction({loanGroup}) {
         date: new Date(),
         type: 1
     }
+    const Space = styled.div`
+          height: 5em;
 
+    `;
     return(
         <div>
             <div className="container-fluid">
@@ -33,6 +38,7 @@ function Transaction({loanGroup}) {
                     })
                 }
             </div>
+            <Space />
             {haveAccess()? <Fab addr={getAddress('AddTransaction',loanGroup?.id??-1)}  initObj =  {transaction} /> :""}
         </div>
     );

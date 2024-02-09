@@ -22,7 +22,6 @@ function Group() {
 
 //todo
     const { loanGroup, loading, error } = GetLoanGroup(id)
-
     // useEffect(()=>{
     //     dispatch(setClientRole(UnpackGroupAuthRole(loanGroup)))
     //     // console.log(loanGroup)

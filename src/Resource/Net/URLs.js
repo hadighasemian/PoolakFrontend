@@ -24,6 +24,7 @@ export default {
     'loans':'api/loan_groups/loan',
     'add_loan':'api/loan_groups/loan/add',
     'delete_loan':'api/loan_groups/loan/delete',
+    'terminate_loan':'api/loan_groups/loan/terminate',
     'transactions':'api/loan_groups/transaction',
     'add_transaction':'api/loan_groups/transaction/add',
     'delete_transaction':'api/loan_groups/transaction/delete',

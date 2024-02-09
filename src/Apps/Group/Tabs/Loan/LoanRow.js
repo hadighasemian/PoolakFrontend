@@ -4,6 +4,7 @@ import {addCommas, digitsEnToFa} from "@persian-tools/persian-tools";
 import getAddress from "../../../../Resource/Routing/Addresses/getAddress";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import CheckIcon from '@mui/icons-material/Check';
 import DeleteLoanDialog from "./DeleteLoanDialog";
 import {useState} from "react";
 import LoanLinearProgress from "./LoanLinearProgress";
@@ -11,15 +12,21 @@ import PaymentsList from "./Payment/PaymentsList";
 import haveAccess from "../../../../Resource/ACL/HaveAccess";
 import LoanSummarise from "../../../../DataManagers/LoanSummarise";
 import MakeLoan from "../../../../DataManagers/MakeLoan";
+import TerminatingLoanDialog from "./TerminatingLoanDialog";
 
 
 function LoanRow({lon,user,loan_group_id}) {
     const [deleteDialogOpen,setDeleteDialogOpen] = useState(false)
+    const [terminateDialogOpen,setTerminateDialogOpen] = useState(false)
     const [expand,setExpand] = useState(false)
     const loan = MakeLoan(lon,user,loan_group_id)
-    const toggleDialog=()=>{
+    const toggleDeleteDialog=()=>{
         setDeleteDialogOpen(!deleteDialogOpen)
     }
+    const toggleTerminateDialog=()=>{
+        setTerminateDialogOpen(!terminateDialogOpen)
+    }
+
     const showLoan=(event)=>{
         setExpand(!expand)
     }
@@ -33,7 +40,8 @@ function LoanRow({lon,user,loan_group_id}) {
     // console.log(user.mobile)
     return(
         <div onClick={showLoan} className='card shadow-sm my-2 border-0 mx-0 '>
-            <DeleteLoanDialog loan={loan} open={deleteDialogOpen} handleClose={toggleDialog}/>
+            <DeleteLoanDialog loan={loan} open={deleteDialogOpen} handleClose={toggleDeleteDialog}/>
+            <TerminatingLoanDialog loan={loan} open={terminateDialogOpen} handleClose={toggleTerminateDialog}/>
             <div className="card-header">
                 <div className="row p-2 text-dark position-relative">
                     <div className="col-8">
@@ -48,14 +56,24 @@ function LoanRow({lon,user,loan_group_id}) {
                         </span>
                     </div>
                     {haveAccess() ?
-                        <div className="col-4  ">
-                            <Link to={getAddress('AddLoan', loan_group_id)} state={{initValue: loan}}
-                                  className='btn float-start btn-outline-dark m-1 p-0'>
-                                <EditIcon className='p-1'/>
-                            </Link>
-                            <button onClick={toggleDialog} className='btn float-start btn-outline-dark m-1 p-0'>
+                        <div className="col-4">
+                            {!loan.terminate ?
+                                <Link to={getAddress('AddLoan', loan_group_id)} state={{initValue: loan}}
+                                      className='btn float-start btn-outline-dark m-1 p-0'>
+                                    <EditIcon className='p-1'/>
+                                </Link>
+                                :""
+                            }
+                            <button onClick={toggleDeleteDialog} className='btn float-start btn-outline-dark m-1 p-0'>
                                 <DeleteIcon className='p-1'/>
                             </button>
+                            {!loan.terminate ?
+                                <button onClick={toggleTerminateDialog} className='btn float-start btn-outline-dark m-1 p-0'>
+                                    <CheckIcon className='p-1'/>
+                                </button>
+                                :""
+                            }
+
                         </div>:""
                     }
                     <div className='col-12 text-center'>

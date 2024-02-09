@@ -4,6 +4,8 @@ import loanGroupSummarise from "../../../../DataManagers/LoanGroupSummarise";
 import haveAccess from "../../../../Resource/ACL/HaveAccess";
 import getAddress from "../../../../Resource/Routing/Addresses/getAddress";
 import Fab from "../../../../Resource/Component/Fab";
+import styled from "styled-components";
+import React from "react";
 
 function Members({loanGroup}) {
     const {cash,loan} = loanGroupSummarise(loanGroup);
@@ -13,6 +15,10 @@ function Members({loanGroup}) {
         loan_group_id: loanGroup?.id??-1,
         role_id: 0,
     }
+    const Space = styled.div`
+          height: 5em;
+
+    `;
     return(
             <>
                 <div className='position-sticky rounded-bottom-2 z-3 border-bottom border-dark-subtle  bg-white top-0 w-100 p-2'>
@@ -42,6 +48,7 @@ function Members({loanGroup}) {
                         })
                     }
                 </div>
+                <Space />
                 {haveAccess()? <Fab addr={getAddress('AddMember',loanGroup?.id??-1)}  initObj =  {member} /> :""}
             </>
     )
