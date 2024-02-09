@@ -37,7 +37,7 @@ function Members({loanGroup}) {
                     {
                         loanGroup?.memberships?.map((membership)=>{
                             return (
-                                <MemberRow key={membership.id}  member={membership}></MemberRow>
+                                <MemberRow key={membership?.id}  member={membership}></MemberRow>
                             )
                         })
                     }

@@ -15,6 +15,7 @@ import {Tooltip} from "@mui/material";
 function MemberRow({member}) {
     const [openDelete,setOpenDelete] = useState(false)
     const [openCheckout,setOpenCheckout] = useState(false)
+    // console.log(member)
     let memberToEdit = {
         id: member.id,
         mobile: member.user.mobile,
