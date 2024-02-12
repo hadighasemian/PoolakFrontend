@@ -28,7 +28,7 @@ function MemberRow({member}) {
     const toggleCheckoutDialog=()=>{
         setOpenCheckout(!openCheckout)
     }
-    const {loansAmountSum,paysValueSum,transactionsValueSum,loanNumber} = MemberSum(member)
+    const {terminatedLoan,terminatedLoanNo,activeLoan,activeLoanNo,paidActiveLoan,transactionsValueSum} = MemberSum(member)
     // console.log(member?.role?.title==='admin')
     return(
         <>
@@ -51,21 +51,41 @@ function MemberRow({member}) {
 
                     </li>
                     <li className="list-group-item d-flex flex-row">
-                        <small>
-                            تعداد
+                        <small className='w-100'>
+                            وام های فعال:
                             &nbsp;
-                            {digitsEnToFa(loanNumber)}
+                            {digitsEnToFa(addCommas(paidActiveLoan))}
+
                             &nbsp;
-                            وام به مجموع مبالغ:
+                            -
                             &nbsp;
-                            {digitsEnToFa(addCommas(loansAmountSum))}
+                            {digitsEnToFa(addCommas(activeLoan))}
+
+                            <small className='badge p-2 back-prime1 float-start'>
+                                {digitsEnToFa(activeLoanNo)}
+                            </small>
+
+
                         </small>
                     </li>
+                    <li className="list-group-item d-flex flex-row">
+                        <small className='w-100'>
+                            وام های مختومه:
+                            {digitsEnToFa(addCommas(terminatedLoan))}
+
+                            <small className='badge  p-2 back-prime1 float-start'>
+                                {digitsEnToFa(terminatedLoanNo)}
+                            </small>
+
+
+                        </small>
+                    </li>
+
                     <li className="list-group-item d-flex flex-row ">
                         <small >
-                            مبلغ پرداختی وام ها:
+                            {/*مبلغ پرداختی وام ها:*/}
                             &nbsp;
-                            {digitsEnToFa(addCommas(paysValueSum))}
+                            {/*{digitsEnToFa(addCommas(paysValueSum))}*/}
                         </small>
                     </li>
                     <li className="list-group-item d-flex flex-row ">

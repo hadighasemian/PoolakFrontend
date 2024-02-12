@@ -6,6 +6,7 @@ import {ButtonGroup, ToggleButton} from "react-bootstrap";
 import React, {useState} from "react";
 import {height} from "@mui/system";
 import styled from "styled-components";
+import TerminatedLoanRow from "./TerminatedLoanRow";
 
 function Loan({loanGroup}) {
     const [terminate,setTerminate] = useState(0)
@@ -65,10 +66,18 @@ function Loan({loanGroup}) {
                             const activeLoans = member?.loans.filter(loan=> loan.terminate == terminate)
                             return(
                                 activeLoans.map((loan)=>{
-
-                                    return (
-                                        <LoanRow key={loan.id}  lon={loan} user={member.user} loan_group_id={loanGroup.id}></LoanRow>
-                                    )
+                                    if(!loan.terminate) {
+                                        return (
+                                            <LoanRow key={loan.id} lon={loan} user={member.user}
+                                                     loan_group_id={loanGroup.id}></LoanRow>
+                                        )
+                                    }
+                                    else {
+                                        return (
+                                            <TerminatedLoanRow key={loan.id} lon={loan} user={member.user}
+                                                     loan_group_id={loanGroup.id}></TerminatedLoanRow>
+                                        )
+                                    }
                                 }))
                         })
                     }

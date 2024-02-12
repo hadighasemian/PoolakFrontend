@@ -74,7 +74,6 @@ function AddTransaction() {
             values.loan_group_id = loan_group_id;
             console.log(values)
             axiosInstance.post(URLs['add_transaction'],values).then(function (response) {
-                console.log(response)
                 if (response?.data?.state?.success){
                     goGroupHome()
                     return
@@ -171,6 +170,20 @@ function AddTransaction() {
                                     <div className="text-danger">{formik.errors.value}</div>
                                 )}
                             </div>
+                            <div className="mt-4">
+                                <label htmlFor="value" className="form-label">کد رهگیری:</label>
+                                <input type="text"
+                                       className="form-control"
+                                       name='code'
+                                       placeholder=''
+                                       value={formik.values.code}
+                                       onChange={formik.handleChange}
+                                />
+                                {formik.touched.code && formik.errors.code && (
+                                    <div className="text-danger">{formik.errors.code}</div>
+                                )}
+                            </div>
+
                             <div className="my-3">
                                 <label htmlFor="date" className="form-label"> تاریخ دریافت:</label>
                                 <input type='hidden'

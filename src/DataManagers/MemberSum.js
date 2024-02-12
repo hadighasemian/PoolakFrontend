@@ -1,12 +1,27 @@
 import LoanSum from "./LoanSum";
+import {forEach} from "react-bootstrap/ElementChildren";
 
 function MemberSum(member) {
-    let loansAmountSum = member.loans?.reduce(
-        (accumulator, loan) =>accumulator + loan.amount , 0);
+    // let loansAmountSum = member.loans?.reduce((accumulator, loan) =>{
+    //         if(!loan.terminate) return accumulator + loan.amount
+    //     }, 0);
+    let terminatedLoan = 0;
+    let terminatedLoanNo = 0;
+    let activeLoan = 0;
+    let paidActiveLoan = 0;
+    let activeLoanNo = 0;
 
-    let paysValueSum = member.loans?.reduce(
-        (accumulator, loan) =>
-            accumulator + LoanSum(loan) , 0);
+    member.loans.forEach((loan,index)=>{
+        if (loan.terminate){
+            terminatedLoan+=loan.amount;
+            paidActiveLoan+=LoanSum(loan);
+            terminatedLoanNo++;
+        }else{
+            activeLoan+=loan.amount;
+            activeLoanNo++;
+        }
+    })
+
 
     let transactionsValueSum = member.transactions?.reduce((accumulator, transaction) => {
         if (transaction.type=='1'){
@@ -15,8 +30,7 @@ function MemberSum(member) {
             return accumulator - transaction.value
         }
     }, 0);
-    let loanNumber = member.loans.length;
 
-    return {loansAmountSum,paysValueSum,transactionsValueSum,loanNumber}
+    return {terminatedLoan,terminatedLoanNo,activeLoan,activeLoanNo,paidActiveLoan,transactionsValueSum}
 }
 export default MemberSum;

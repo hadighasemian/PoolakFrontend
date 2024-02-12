@@ -20,15 +20,17 @@ import AddTransaction from "./Apps/Group/Tabs/Transaction/AddTransaction";
 import AddPayment from "./Apps/Group/Tabs/Loan/Payment/AddPayment";
 import Auth from "./Apps/Auth/Auth";
 import MobileCode from "./Apps/Auth/MobileCode/MobileCode";
-import React from "react";
+import React, {useEffect, useState} from "react";
 
 
 
 function App() {
 
+
+
+
     return (
         <LocalizationProvider dateAdapter={AdapterDateFnsJalali}>
-
         <SWRConfig
             value={{
                 refreshInterval: 0,

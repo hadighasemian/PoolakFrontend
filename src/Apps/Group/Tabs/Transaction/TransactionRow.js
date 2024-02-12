@@ -34,6 +34,7 @@ function TransactionRow({transaction,user,loan_group_id}) {
                     {digitsEnToFa(addCommas(trans.value))}
                     <span className='mx-1'>تومان</span>
                     <span className=' text-muted badge ms-auto'>{digitsEnToFa(moment(trans.date).locale('fa').format('dddd, LL'))}</span>
+                    <span className=' text-muted badge ms-auto float-start'>{digitsEnToFa(trans.code)}</span>
             </div>
             {haveAccess() ?
                 <div className="card-footer">

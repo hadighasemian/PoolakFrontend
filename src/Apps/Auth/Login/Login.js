@@ -57,7 +57,6 @@ function Login() {
             setLoading(true)
             // const { data, loading, error } = Login(values)
             axiosInstance.post(URLs['login'],values).then(function (response) {
-                console.log(response)
                 setData(response)
             }).catch(function (error) {
                 setErrors(error?.response?.data?.errors)
