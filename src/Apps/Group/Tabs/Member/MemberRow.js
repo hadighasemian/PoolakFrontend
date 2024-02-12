@@ -80,14 +80,6 @@ function MemberRow({member}) {
 
                         </small>
                     </li>
-
-                    <li className="list-group-item d-flex flex-row ">
-                        <small >
-                            {/*مبلغ پرداختی وام ها:*/}
-                            &nbsp;
-                            {/*{digitsEnToFa(addCommas(paysValueSum))}*/}
-                        </small>
-                    </li>
                     <li className="list-group-item d-flex flex-row ">
                         <small>
                             امتیاز وام:
