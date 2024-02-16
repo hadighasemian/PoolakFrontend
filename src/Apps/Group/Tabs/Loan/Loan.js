@@ -12,14 +12,14 @@ function Loan({loanGroup}) {
     const [terminate,setTerminate] = useState(0)
 
 
-    const loan = {
-        id:'-1',
-        amount:1000,
-        length:1,
-        date:new Date(),
-        user_id:-1,
-        loan_group_id:loanGroup?.id
-    }
+    // const loan = {
+    //     id:'-1',
+    //     amount:1000,
+    //     length:1,
+    //     date:new Date(),
+    //     user_id:-1,
+    //     loan_group_id:loanGroup?.id
+    // }
     const Space = styled.div`
           height: 5em;
 
@@ -83,7 +83,7 @@ function Loan({loanGroup}) {
                     }
                 </div>
                 <Space />
-                {haveAccess()? <Fab addr={getAddress('AddLoan',loanGroup?.id??-1)}  initObj =  {loan} /> :""}
+                {/*{haveAccess()? <Fab addr={getAddress('AddLoan',loanGroup?.id??-1)}  initObj =  {loan} /> :""}*/}
 
             </div>
     )

@@ -3,6 +3,7 @@ import {useEffect} from "react";
 import {BottomNavigation, BottomNavigationAction, CssBaseline, Paper, Typography} from '@mui/material';
 import {Box} from "@mui/system";
 import { Cyclone,Chat, EventAvailable, RecentActors} from "@mui/icons-material";
+import BackHandIcon from '@mui/icons-material/BackHand';
 import StatusFrame from "../Other/StatusFrame";
 import {useDispatch, useSelector} from "react-redux";
 import {setHomeTab} from "../../Resource/DB/Redux/configSlice";
@@ -14,6 +15,7 @@ import Loan from "./Tabs/Loan/Loan";
 import Transaction from "./Tabs/Transaction/Transaction";
 import ChatPage from "./Tabs/Chat/Chat";
 import './Group.css'
+import LoanRequest from "./Tabs/LoanRequest/LoanRequest";
 
 function Group() {
     const {id} = useParams()
@@ -43,8 +45,10 @@ function Group() {
             case 1:
                 return <Loan loanGroup={loanGroup}   />
             case 2:
-                return <Transaction loanGroup={loanGroup} />;
+                return <LoanRequest loanGroup={loanGroup} />;
             case 3:
+                return <Transaction loanGroup={loanGroup} />;
+            case 4:
                 return <ChatPage loanGroup={loanGroup} />;
             default:
                 return <></>;
@@ -83,6 +87,16 @@ function Group() {
                             }
                             icon={<Cyclone/>}
                         />
+                        <BottomNavigationAction
+                            label={
+                                <Typography variant="body2" style={{fontFamily: 'sansDn', fontWeight: 'bold'}}>
+                                     طلب وام
+                                </Typography>
+                            }
+                            icon={<BackHandIcon/>}
+                        />
+
+
                         <BottomNavigationAction
                             label={
                                 <Typography variant="body2" style={{fontFamily: 'sansDn', fontWeight: 'bold'}}>

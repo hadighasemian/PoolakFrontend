@@ -38,7 +38,9 @@ function MemberRow({member}) {
                 <div className="card-header">
                     {(member?.role?.title==='admin')?<KeyIcon className='text-prime1'></KeyIcon>:null}
                     <span className='small fw-bold text-dark'> {member.user.name}</span>
-                    <span className=' float-start badge bg-secondary  '><small>{digitsEnToFa(member.user.mobile)}</small> </span>
+                    <span className=' float-start badge bg-secondary'>
+                        <small>{digitsEnToFa(member.user.mobile)}</small>
+                    </span>
 
                 </div>
 
@@ -48,24 +50,19 @@ function MemberRow({member}) {
                             موجودی:
                             {digitsEnToFa(addCommas(transactionsValueSum))}
                         </small>
-
                     </li>
                     <li className="list-group-item d-flex flex-row">
                         <small className='w-100'>
                             وام های فعال:
                             &nbsp;
                             {digitsEnToFa(addCommas(paidActiveLoan))}
-
                             &nbsp;
                             -
                             &nbsp;
                             {digitsEnToFa(addCommas(activeLoan))}
-
                             <small className='badge p-2 back-prime1 float-start'>
                                 {digitsEnToFa(activeLoanNo)}
                             </small>
-
-
                         </small>
                     </li>
                     <li className="list-group-item d-flex flex-row">

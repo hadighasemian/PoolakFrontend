@@ -15,7 +15,10 @@ function FabAddMember({addr,initObj}){
                     <Link to={addr}
                           state={{ initValue: initObj }}
                           type="button"
-                          className="btn btn-main  shadow-sm  d-flex align-items-center justify-content-center  btn-prime1 has-tooltip  " data-placement="left"
+                          className="btn btn-main  shadow-sm  d-flex
+                          align-items-center justify-content-center
+                          btn-prime1 has-tooltip"
+                          data-placement="left"
                           variant="outlined"
                           title="Menu">
                         <i className="text-dark fs-4   bi bi-plus-lg  "></i>

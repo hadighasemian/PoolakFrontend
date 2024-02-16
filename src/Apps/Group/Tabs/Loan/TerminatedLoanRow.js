@@ -13,7 +13,7 @@ import haveAccess from "../../../../Resource/ACL/HaveAccess";
 import LoanSummarise from "../../../../DataManagers/LoanSummarise";
 import MakeLoan from "../../../../DataManagers/MakeLoan";
 import TerminatingLoanDialog from "./TerminatingLoanDialog";
-
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 function TerminatedLoanRow({lon,user,loan_group_id}) {
     const [deleteDialogOpen,setDeleteDialogOpen] = useState(false)
@@ -63,11 +63,11 @@ function TerminatedLoanRow({lon,user,loan_group_id}) {
                         </div>:""
                     }
                     <div className='col-12 text-center'>
-                        {digitsEnToFa(addCommas(sum))} - {digitsEnToFa(addCommas(loan.amount))}
+                        {digitsEnToFa(addCommas(sum))}
 
                     </div>
-                    <div className='col-12'>
-                        <LoanLinearProgress paid={paid} time={time}/>
+                    <div className='col-12 d-flex  justify-content-center '>
+                        <KeyboardArrowDownIcon className='mx-auto'/>
                     </div>
                 </div>
             </div>

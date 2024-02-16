@@ -21,6 +21,7 @@ import AddPayment from "./Apps/Group/Tabs/Loan/Payment/AddPayment";
 import Auth from "./Apps/Auth/Auth";
 import MobileCode from "./Apps/Auth/MobileCode/MobileCode";
 import React, {useEffect, useState} from "react";
+import AddLoanRequest from "./Apps/Group/Tabs/LoanRequest/AddLoanRequest";
 
 
 
@@ -51,6 +52,7 @@ function App() {
                                   <Route path=":id" element={<Group />} />
                                   <Route path="AddMember" element={<AddMember />} />
                                   <Route path="AddLoan/:group_id" element={<AddLoan />} />
+                                  <Route path="AddLoanRequest/:group_id" element={<AddLoanRequest />} />
                                   <Route path="AddTransaction/:loan_group_id" element={<AddTransaction />} />
                                   <Route path="AddPayment/:group_id" element={<AddPayment />} />
                               </Route>

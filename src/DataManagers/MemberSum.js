@@ -13,11 +13,11 @@ function MemberSum(member) {
 
     member.loans.forEach((loan,index)=>{
         if (loan.terminate){
-            terminatedLoan+=loan.amount;
-            paidActiveLoan+=LoanSum(loan);
+            terminatedLoan += loan.amount;
             terminatedLoanNo++;
         }else{
-            activeLoan+=loan.amount;
+            activeLoan += loan.amount;
+            paidActiveLoan += LoanSum(loan);
             activeLoanNo++;
         }
     })

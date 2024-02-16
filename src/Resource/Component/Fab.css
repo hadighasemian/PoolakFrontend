@@ -2,9 +2,21 @@
 .btn-group-fab {
     position: absolute;
     width: 50px;
-    height: auto;
+    height: 50px;
     right: 30px;
     bottom: 8%;
+    animation: slideUp 1s ease forwards;
+    opacity: 0;
+}
+@keyframes slideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(100%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 .btn-group-fab div {
     position: relative;
