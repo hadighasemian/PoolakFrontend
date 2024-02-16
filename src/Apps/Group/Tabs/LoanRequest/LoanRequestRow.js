@@ -26,7 +26,7 @@ function LoanRequestRow({lonRequest,user,loan_group_id}) {
         loan_group_id:loan_group_id
     }
     return(
-        <div  className='card shadow-sm my-2 border-0 mx-0 '>
+        <div  className={`card shadow-sm my-2 border-0 mx-0  ${loanRequest.loan_id ? 'back-prime1':''}`}>
             <DeleteLoanRequestDialog loanRequest={loanRequest} open={deleteDialogOpen} handleClose={toggleDeleteDialog}/>
             <div className="card-header">
                 <div className="row p-2 text-dark position-relative">
@@ -51,26 +51,38 @@ function LoanRequestRow({lonRequest,user,loan_group_id}) {
                         </span>
 
                     </div>
-                    {haveAccess() ?
-                        <div className="col-4">
-                            {!loanRequest.terminate ?
-                                <Link to={getAddress('AddLoanRequest', loan_group_id)} state={{initValue: loanRequest}}
-                                      className='btn float-start btn-outline-dark m-1 p-0'>
-                                    <EditIcon className='p-1'/>
-                                </Link>
-                                :""
-                            }
-                            <button onClick={toggleDeleteDialog} className='btn float-start btn-outline-dark m-1 p-0'>
-                                <DeleteIcon className='p-1'/>
-                            </button>
-                        </div>:""
+                    {
+                        !loanRequest?.loan_id?
+                            <div className="col-4">
+                                {!loanRequest.terminate ?
+                                    <Link to={getAddress('AddLoanRequest', loan_group_id)} state={{initValue: loanRequest}}
+                                          className='btn float-start btn-outline-dark m-1 p-0'>
+                                        <EditIcon className='p-1'/>
+                                    </Link>
+                                    :""
+                                }
+                                <button onClick={toggleDeleteDialog} className='btn float-start btn-outline-dark m-1 p-0'>
+                                    <DeleteIcon className='p-1'/>
+                                </button>
+                            </div>:""
                     }
+
                 </div>
             </div>
-            {haveAccess() ?
+            {
+                loanRequest?.loan_id?
+                    <div className="card-footer text-decoration-none text-prime1
+                      d-flex align-items-center text-dark justify-content-center">
+                    پرداخت شد!!
+                        {lonRequest?.loan?.date}
+                    </div>
+                    :
+                haveAccess() ?
                 <Link to={getAddress('AddLoan',loan_group_id??-1)}
                       state={{ initValue: loanRequestToLoan }}
-                      className="card-footer text-decoration-none text-prime1  d-flex align-items-center text-dark justify-content-center">
+                      className="card-footer text-decoration-none text-prime1
+                      d-flex align-items-center text-dark justify-content-center">
+
                     پرداخت وام
                 </Link>:""
             }
