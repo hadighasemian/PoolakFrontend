@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react';
 import getConfiguredAxis from "./CreateAxiosInstance";
 import AuthModel from "../DB/Models/Auth/AuthModel";
 
-const useAxiosPost = (url,postedData) => {
+const AxiosPost = (url, postedData) => {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -25,4 +25,4 @@ const useAxiosPost = (url,postedData) => {
     return { data, loading, error};
 };
 
-export default useAxiosPost;
+export default AxiosPost;

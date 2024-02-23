@@ -6,17 +6,20 @@ import ToastValidatorError from "../../../Other/ToastValidatorError";
 import {useSnackbar} from "notistack";
 import UnpackErrors from "../../../../Resource/Net/Error/UnpackErrors";
 import URLs from "../../../../Resource/Net/URLs";
+import {setUpdateFlag} from "../../../../Resource/DB/Redux/loanGroupSlice";
+import {useDispatch} from "react-redux";
 
 function TerminatingLoanDialog({open,handleClose,loan}) {
     const axiosInstance = getConfiguredAxis(AuthModel());
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
     const { enqueueSnackbar } = useSnackbar();
-
+    const dispatch = useDispatch()
     const terminateLoan = () => {
         setLoading(true)
         axiosInstance.post(URLs['terminate_loan'],loan).then(function (response) {
             if (response?.data?.state?.success){
+                dispatch(setUpdateFlag());
                 handleClose()
             }
         }).catch(function (error) {

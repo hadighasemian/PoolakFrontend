@@ -15,6 +15,7 @@ import {DatePicker} from "@mui/x-date-pickers";
 import getAddress from "../../../../Resource/Routing/Addresses/getAddress";
 import UnpackErrors from "../../../../Resource/Net/Error/UnpackErrors";
 import haveAccess from "../../../../Resource/ACL/HaveAccess";
+import GetLoanGroupAxis from "../../../../Resource/Net/Requests/GetLoanGroupAxios";
 
 function AddLoanRequest(){
     const navigate = useNavigate();
@@ -33,6 +34,7 @@ function AddLoanRequest(){
         axiosInstance.post(URLs['loan_group_member'],{'loan_group_id':group_id}).then(function (response) {
             if (response?.data?.state?.success){
                 setMembers(response?.data?.data?.member)
+
                 return
             }
         }).catch(function (error) {
@@ -80,16 +82,16 @@ function AddLoanRequest(){
         onSubmit: async (values, { setSubmitting, setErrors }) => {
             setLoading(true)
             const postData = {...values,loan_group_id:group_id}
-            console.log(postData)
             axiosInstance.post(URLs['add_loan_request'],postData).then(function (response) {
-                console.log(response)
                 if (response?.data?.state?.success){
+
                     goGroupHome()
                     return
                 }
             }).catch(function (error) {
                 setErrors(UnpackErrors(error))
             }).finally(()=>{
+
                 setLoading(false)
             });
         },

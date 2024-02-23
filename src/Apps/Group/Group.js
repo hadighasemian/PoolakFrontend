@@ -1,39 +1,57 @@
 import {useParams} from "react-router-dom";
-import {useEffect} from "react";
 import {BottomNavigation, BottomNavigationAction, CssBaseline, Paper, Typography} from '@mui/material';
-import {Box} from "@mui/system";
 import { Cyclone,Chat, EventAvailable, RecentActors} from "@mui/icons-material";
 import BackHandIcon from '@mui/icons-material/BackHand';
 import StatusFrame from "../Other/StatusFrame";
 import {useDispatch, useSelector} from "react-redux";
 import {setHomeTab} from "../../Resource/DB/Redux/configSlice";
-import GetLoanGroup from "../../Resource/Net/Requests/GetLoanGroup";
-import {setClientRole} from "../../Resource/DB/Redux/authSlice";
-import UnpackGroupAuthRole from "./UnpackGroupAuthRole";
 import Members from "./Tabs/Member/Members";
 import Loan from "./Tabs/Loan/Loan";
 import Transaction from "./Tabs/Transaction/Transaction";
 import ChatPage from "./Tabs/Chat/Chat";
 import './Group.css'
 import LoanRequest from "./Tabs/LoanRequest/LoanRequest";
+import GetLoanGroupAxis from "../../Resource/Net/Requests/GetLoanGroupAxios";
+import {useEffect, useState} from "react";
+import AxiosPost from "../../Resource/Net/AxiosPost";
+import URLs from "../../Resource/Net/URLs";
+import {setLoanGroup} from "../../Resource/DB/Redux/loanGroupSlice";
+import UnpackErrors from "../../Resource/Net/Error/UnpackErrors";
+import getConfiguredAxis from "../../Resource/Net/CreateAxiosInstance";
+import AuthModel from "../../Resource/DB/Models/Auth/AuthModel";
 
 function Group() {
     const {id} = useParams()
     const dispatch = useDispatch()
+    const axiosInstance = getConfiguredAxis(AuthModel());
     const homeTabNumber = useSelector(state => state.config.homeTab);
-
-//todo
-    const { loanGroup, loading, error } = GetLoanGroup(id)
-    // useEffect(()=>{
-    //     dispatch(setClientRole(UnpackGroupAuthRole(loanGroup)))
-    //     // console.log(loanGroup)
-    //     // console.log(UnpackGroupAuthRole(loanGroup))
-    // },[loanGroup])
-
-    // const handleChange = (event, newValue) => {
-    //     changeHomeTab(newValue);
-    // };
-
+    const [loanGroup,setLoanGroup] = useState(useSelector(state => state.loanGroup.loanGroup));
+    const updateFlag = useSelector(state => state.loanGroup.updateFlag);
+    // const [update, setUpdate] = useState(0)
+    GetLoanGroupAxis(id)
+    const updateData =  ()=>{
+        // const { data, loading, error} = AxiosPost(URLs['loanGroup'],{'loan_group_id':id})
+        axiosInstance.post(URLs['loanGroup'],{'loan_group_id':id}).then(function (response) {
+            // console.log(response?.data?.data?.loanGroup)
+            // let loanGroup = response?.data?.data?.loanGroup;
+            dispatch(setLoanGroup(response?.data?.data?.loanGroup))
+            // setUpdate(update+1)
+            // loanGroup = response?.data?.data?.loanGroup;
+        }).catch(function (error) {
+            // setErrors(UnpackErrors(error))
+        }).finally(()=>{
+            // setLoading(false)
+        });
+        // let loanGroup = data?.data?.loanGroup;
+        // dispatch(setLoanGroup(loanGroup))
+    }
+    useEffect(() => {
+        // console.log(updateFlag)
+        updateData()
+    }, [updateFlag]);
+    // useEffect(() => {
+    //     console.log('loanGroup',loanGroup)
+    // }, [loanGroup]);
     const changeHomeTab = (tab) => {
         dispatch(setHomeTab(tab))
     }
@@ -41,9 +59,9 @@ function Group() {
 
         switch (homeTabNumber) {
             case 0:
-                return <Members loanGroup={loanGroup}/>;
+                return <Members loanGroup={loanGroup} />;
             case 1:
-                return <Loan loanGroup={loanGroup}   />
+                return <Loan loanGroup={loanGroup} />;
             case 2:
                 return <LoanRequest loanGroup={loanGroup} />;
             case 3:
@@ -56,7 +74,7 @@ function Group() {
 
     };
     return (
-        <StatusFrame className='h-100' loading={loading} error={error}>
+        <StatusFrame className='h-100' loading={false} error={false}>
             <div className={' h-100'}>
                 <div className=' tab-frame overflow-auto'>
                     {renderContent()}

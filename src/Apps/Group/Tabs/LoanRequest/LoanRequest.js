@@ -1,7 +1,7 @@
 import haveAccess from "../../../../Resource/ACL/HaveAccess";
 import Fab from "../../../../Resource/Component/Fab";
 import getAddress from "../../../../Resource/Routing/Addresses/getAddress";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Space from "../../../../Resource/Component/Space";
 import LoanRow from "../Loan/LoanRow";
 import LoanRequestRow from "./LoanRequestRow";
@@ -18,11 +18,11 @@ function LoanRequest({loanGroup}) {
         loan_group_id:loanGroup?.id
     }
 
+
     return(
             <div>
                 <div className="container-fluid ">
                     {
-
                         loanGroup?.memberships.map((member)=>{
                             return(
                                 member?.loan_requests.map((request)=>{

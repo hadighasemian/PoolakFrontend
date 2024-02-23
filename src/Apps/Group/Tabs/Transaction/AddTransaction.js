@@ -72,14 +72,12 @@ function AddTransaction() {
         onSubmit: async (values, { setSubmitting, setErrors }) => {
             setLoading(true)
             values.loan_group_id = loan_group_id;
-            console.log(values)
             axiosInstance.post(URLs['add_transaction'],values).then(function (response) {
                 if (response?.data?.state?.success){
                     goGroupHome()
                     return
                 }
             }).catch(function (error) {
-                console.log(error)
                 setErrors(UnpackErrors(error))
             }).finally(()=>{
                 setLoading(false)

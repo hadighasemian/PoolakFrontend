@@ -5,8 +5,12 @@ import Fab from "../../../../Resource/Component/Fab";
 import getAddress from "../../../../Resource/Routing/Addresses/getAddress";
 import styled from "styled-components";
 import React from "react";
+import GetLoanGroupAxis from "../../../../Resource/Net/Requests/GetLoanGroupAxios";
+import URLs from "../../../../Resource/Net/URLs";
 
 function Transaction({loanGroup}) {
+
+    // updateLoanGroups()
     const transaction =  {
         id: -1,
         user_id: '-1',
@@ -23,11 +27,6 @@ function Transaction({loanGroup}) {
         <div>
             <div className="container-fluid">
                 {
-                    // transactions?.map((transaction)=>{
-                    //     // return (
-                    //     //     <TransactionRow  transaction={transaction}></TransactionRow>
-                    //     // )
-                    // })
                     loanGroup?.memberships.map((member)=>{
                         return(
                         member?.transactions.map((transaction)=>{

@@ -8,6 +8,7 @@ import styled from "styled-components";
 import React from "react";
 
 function Members({loanGroup}) {
+    // updateLoanGroups()
     const {cash,loan} = loanGroupSummarise(loanGroup);
     const member =  {
         id: -1,

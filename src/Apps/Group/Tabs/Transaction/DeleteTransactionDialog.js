@@ -4,21 +4,26 @@ import AuthModel from "../../../../Resource/DB/Models/Auth/AuthModel";
 import {useState} from "react";
 import StatusFrame from "../../../Other/StatusFrame";
 import URLs from "../../../../Resource/Net/URLs";
+import {setUpdateFlag} from "../../../../Resource/DB/Redux/loanGroupSlice";
+import {useDispatch} from "react-redux";
 
 function DeleteTransactionDialog({open,handleClose, transaction}) {
     const axiosInstance = getConfiguredAxis(AuthModel());
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
+    const dispatch = useDispatch()
     const deleteTransactions = () => {
         setLoading(true)
         axiosInstance.post(URLs['delete_transaction'],transaction).then(function (response) {
             if (response?.data?.state?.success){
+                dispatch(setUpdateFlag());
                 handleClose()
             }
             setError(response.data.errors);
         }).catch(function (error) {
             setError(true)
         }).finally(()=>{
+
             setLoading(false)
         });
     }

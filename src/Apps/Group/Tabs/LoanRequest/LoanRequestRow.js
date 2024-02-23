@@ -18,7 +18,7 @@ function LoanRequestRow({lonRequest,user,loan_group_id}) {
     }
     const loanRequestToLoan = {
         id:'-1',
-        loan_request_id:lonRequest.id,
+        loan_request_id:loanRequest.id,
         amount:loanRequest.amount,
         length:loanRequest.length,
         date:loanRequest.date,
@@ -26,7 +26,7 @@ function LoanRequestRow({lonRequest,user,loan_group_id}) {
         loan_group_id:loan_group_id
     }
     return(
-        <div  className={`card shadow-sm my-2 border-0 mx-0  ${loanRequest.loan_id ? 'back-prime1':''}`}>
+        <div  className={`card shadow-sm my-2 border-0 mx-0  ${loanRequest.loan_id ? 'back-prime1 opacity-50':''}`}>
             <DeleteLoanRequestDialog loanRequest={loanRequest} open={deleteDialogOpen} handleClose={toggleDeleteDialog}/>
             <div className="card-header">
                 <div className="row p-2 text-dark position-relative">

@@ -6,6 +6,8 @@ import {useSnackbar} from "notistack";
 import ToastValidatorError from "../../../Other/ToastValidatorError";
 import UnpackErrors from "../../../../Resource/Net/Error/UnpackErrors";
 import URLs from "../../../../Resource/Net/URLs";
+import {setUpdateFlag} from "../../../../Resource/DB/Redux/loanGroupSlice";
+import {useDispatch} from "react-redux";
 
 function DeleteMemberDialog({open,handleClose,member}) {
     const axiosInstance = getConfiguredAxis(AuthModel());
@@ -13,12 +15,13 @@ function DeleteMemberDialog({open,handleClose,member}) {
     const [error, setError] = useState();
     const { enqueueSnackbar } = useSnackbar();
     let url= URLs['delete_member_group']
-
+    const dispatch = useDispatch()
     const deleteLoan = () => {
         setLoading(true)
         axiosInstance.post(url, {membership_id:member.id}).then(function (response) {
 
             if (response?.data?.state?.success){
+                dispatch(setUpdateFlag());
                 handleClose()
                 return
             }

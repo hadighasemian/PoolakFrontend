@@ -13,6 +13,8 @@ import haveAccess from "../../../../Resource/ACL/HaveAccess";
 import LoanSummarise from "../../../../DataManagers/LoanSummarise";
 import MakeLoan from "../../../../DataManagers/MakeLoan";
 import TerminatingLoanDialog from "./TerminatingLoanDialog";
+import {useDispatch} from "react-redux";
+import {setLoanGroup, setUpdateFlag} from "../../../../Resource/DB/Redux/loanGroupSlice";
 
 
 function LoanRow({lon,user,loan_group_id}) {
@@ -20,8 +22,10 @@ function LoanRow({lon,user,loan_group_id}) {
     const [terminateDialogOpen,setTerminateDialogOpen] = useState(false)
     const [expand,setExpand] = useState(false)
     const loan = MakeLoan(lon,user,loan_group_id)
+    const dispatch = useDispatch()
     const toggleDeleteDialog=()=>{
         setDeleteDialogOpen(!deleteDialogOpen)
+        if (deleteDialogOpen)dispatch(setUpdateFlag())
     }
     const toggleTerminateDialog=()=>{
         setTerminateDialogOpen(!terminateDialogOpen)

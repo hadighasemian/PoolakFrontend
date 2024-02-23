@@ -12,11 +12,16 @@ import {useState} from "react";
 import getAddress from "../../../../Resource/Routing/Addresses/getAddress";
 import haveAccess from "../../../../Resource/ACL/HaveAccess";
 import makeTransaction from "../../../../DataManagers/MakeTransaction";
+import {setUpdateFlag} from "../../../../Resource/DB/Redux/loanGroupSlice";
+import {useDispatch} from "react-redux";
 
 function TransactionRow({transaction,user,loan_group_id}) {
     const [open,setOpen] = useState(false)
+    const dispatch = useDispatch()
+
     const toggleDeleteDialog=()=>{
         setOpen(!open)
+        // if(open)dispatch(setUpdateFlag());
     }
     const trans = makeTransaction(transaction,user,loan_group_id)
     return(

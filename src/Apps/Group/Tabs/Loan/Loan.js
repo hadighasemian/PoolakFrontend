@@ -3,15 +3,18 @@ import haveAccess from "../../../../Resource/ACL/HaveAccess";
 import Fab from "../../../../Resource/Component/Fab";
 import getAddress from "../../../../Resource/Routing/Addresses/getAddress";
 import {ButtonGroup, ToggleButton} from "react-bootstrap";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {height} from "@mui/system";
 import styled from "styled-components";
 import TerminatedLoanRow from "./TerminatedLoanRow";
+import GetLoanGroupAxis from "../../../../Resource/Net/Requests/GetLoanGroupAxios";
+import URLs from "../../../../Resource/Net/URLs";
+import Space from "../../../../Resource/Component/Space";
 
 function Loan({loanGroup}) {
     const [terminate,setTerminate] = useState(0)
 
-
+    // updateLoanGroups()
     // const loan = {
     //     id:'-1',
     //     amount:1000,
@@ -20,15 +23,9 @@ function Loan({loanGroup}) {
     //     user_id:-1,
     //     loan_group_id:loanGroup?.id
     // }
-    const Space = styled.div`
-          height: 5em;
-
-    `;
-
 
     function changeLoanType(e) {
         setTerminate(e.target.value)
-        console.log(e)
     }
 
     return(
