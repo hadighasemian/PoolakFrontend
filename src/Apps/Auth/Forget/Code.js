@@ -8,7 +8,7 @@ import {setAuthState} from "../../../Resource/DB/Redux/authSlice";
 import {useDispatch} from "react-redux";
 import {useNavigate} from "react-router-dom";
 
-function ConfirmCode({authData,setPageState}) {
+function Code({authData,setPageState}) {
     const [loading, setLoading] = useState(false);
     const [time, setTime] = useState(authData.user.time);
     const [error, setError] = useState(false);
@@ -18,6 +18,15 @@ function ConfirmCode({authData,setPageState}) {
     const axiosInstance = getConfiguredAxis(authData);
     const dispatch = useDispatch()
     const navigate = useNavigate();
+
+    function backToMobile() {
+        setPageState('mobile')
+    }
+    function goToName() {
+        setPageState('pass')
+    }
+
+
     useEffect(() => {
         // Exit the effect when the timer reaches 0
         if (time === 0) return;
@@ -37,17 +46,20 @@ function ConfirmCode({authData,setPageState}) {
     const  seconds= Math.floor(time / 60);
     const  minutes= time % 60;
 
-    useEffect(()=>{
-        if(login){
-            navigate('/Home', { replace: true });
-        }
-    },[login])
+
     useEffect(()=>{
         if (data?.data?.data?.authState) {
             dispatch(setAuthState(data?.data?.data?.authState))
             setLogin(data?.data?.data?.authState?.login?.login)
         }
     },[data])
+    useEffect(()=>{
+        if(login){
+            goToName()
+        }
+    },[login])
+
+
     const validate=values => {
         const errors = {};
 
@@ -73,8 +85,7 @@ function ConfirmCode({authData,setPageState}) {
                 id: authData.user.id,
             }
             // console.log(values)
-            axiosInstance.post(URLs['confirm_code'],postData).then(function (response) {
-                console.log(response)
+            axiosInstance.post(URLs.auth.forget.confirm_code,postData).then(function (response) {
                 if (response?.data?.state?.success){
                     setData(response)
                     return
@@ -87,9 +98,7 @@ function ConfirmCode({authData,setPageState}) {
             });
         },
     });
-    function backToMobile() {
-        setPageState('mobile')
-    }
+
 
     return (
         <StatusFrame loading={loading} error={error}>
@@ -129,4 +138,4 @@ function ConfirmCode({authData,setPageState}) {
         </StatusFrame>
     );
 }
-export default ConfirmCode
+export default Code

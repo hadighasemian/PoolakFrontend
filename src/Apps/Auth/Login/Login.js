@@ -29,6 +29,7 @@ function Login() {
     useEffect(()=>{
         if (data?.data?.data?.authState) {
             dispatch(setAuthState(data?.data?.data?.authState))
+            // console.log(data?.data?.data?.authState)
             setLogin(data?.data?.data?.authState?.login?.login)
         }
     },[data])
@@ -56,7 +57,7 @@ function Login() {
         onSubmit: async (values, { setSubmitting, setErrors }) => {
             setLoading(true)
             // const { data, loading, error } = Login(values)
-            axiosInstance.post(URLs['login'],values).then(function (response) {
+            axiosInstance.post(URLs.auth.login,values).then(function (response) {
                 setData(response)
             }).catch(function (error) {
                 setErrors(error?.response?.data?.errors)
@@ -75,6 +76,7 @@ function Login() {
                     className="form-control"
                     name='mobile'
                     id='mobile'
+                    autoComplete='off'
                     placeholder="شماره همراه"
                     value={formik.values.mobile}
                     onChange={formik.handleChange}
@@ -97,9 +99,10 @@ function Login() {
             <div className="row">
                 <LoadingBtn loading={loading}></LoadingBtn>
             </div>
+
             <div className="row">
-                <Link className='text-decoration-none m-2' to={getAddress('MobileCode')}>ثبت نام کنید.</Link>
-                <Link className='text-decoration-none m-2' to={getAddress('MobileCode')}>فراموشی رمز عبور.</Link>
+                <Link className='text-decoration-none m-2' to={getAddress('Register')}>ثبت نام کنید.</Link>
+                <Link className='text-decoration-none m-2' to={getAddress('Forget')}>فراموشی رمز عبور.</Link>
             </div>
         </form>
     );

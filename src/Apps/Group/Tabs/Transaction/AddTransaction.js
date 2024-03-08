@@ -25,7 +25,7 @@ function AddTransaction() {
 
 
     useEffect(()=>{
-        axiosInstance.post(URLs['loan_group_member'],{'loan_group_id':loan_group_id}).then(function (response) {
+        axiosInstance.post(URLs.loan_groups.member.index,{'loan_group_id':loan_group_id}).then(function (response) {
             if (response?.data?.state?.success){
                 setMember(response?.data?.data?.member)
                 return
@@ -72,7 +72,7 @@ function AddTransaction() {
         onSubmit: async (values, { setSubmitting, setErrors }) => {
             setLoading(true)
             values.loan_group_id = loan_group_id;
-            axiosInstance.post(URLs['add_transaction'],values).then(function (response) {
+            axiosInstance.post(URLs.loan_groups.transactions.add,values).then(function (response) {
                 if (response?.data?.state?.success){
                     goGroupHome()
                     return

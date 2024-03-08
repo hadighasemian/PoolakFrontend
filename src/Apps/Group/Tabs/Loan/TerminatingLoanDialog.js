@@ -17,7 +17,7 @@ function TerminatingLoanDialog({open,handleClose,loan}) {
     const dispatch = useDispatch()
     const terminateLoan = () => {
         setLoading(true)
-        axiosInstance.post(URLs['terminate_loan'],loan).then(function (response) {
+        axiosInstance.post(URLs.loan_groups.loans.terminate,loan).then(function (response) {
             if (response?.data?.state?.success){
                 dispatch(setUpdateFlag());
                 handleClose()

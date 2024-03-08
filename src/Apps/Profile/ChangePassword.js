@@ -54,14 +54,13 @@ function ChangePassword() {
         validate,
         onSubmit: async (values, { setSubmitting, setErrors }) => {
             setLoading(true)
-            axiosInstance.post(URLs['change_password'],values).then(function (response) {
+            axiosInstance.post(URLs.profile.changePassword,values).then(function (response) {
                 if (response?.data?.state?.success){
                     dispatch(setAuthUser(response?.data?.data?.user))
                     goGroupHome()
                     return
                 }
             }).catch(function (error) {
-                console.log(error)
                 setErrors(UnpackErrors(error))
             }).finally(()=>{
                 setLoading(false)

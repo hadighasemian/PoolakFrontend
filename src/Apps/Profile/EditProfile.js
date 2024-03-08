@@ -50,7 +50,7 @@ function EditProfile() {
         validate,
         onSubmit: async (values, { setSubmitting, setErrors }) => {
             setLoading(true)
-            axiosInstance.post(URLs['edit_profile'],values).then(function (response) {
+            axiosInstance.post(URLs.profile.editProfile,values).then(function (response) {
                 if (response?.data?.state?.success){
                     dispatch(setAuthUser(response?.data?.data?.user))
                     goGroupHome()

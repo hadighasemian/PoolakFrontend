@@ -19,39 +19,44 @@ import {setLoanGroup} from "../../Resource/DB/Redux/loanGroupSlice";
 import UnpackErrors from "../../Resource/Net/Error/UnpackErrors";
 import getConfiguredAxis from "../../Resource/Net/CreateAxiosInstance";
 import AuthModel from "../../Resource/DB/Models/Auth/AuthModel";
+import getLoanGroupFromResponse from "../../DataManagers/getLoanGroupFromResponse";
+import {setClientRole} from "../../Resource/DB/Redux/authSlice";
+import UnpackGroupAuthRole from "./UnpackGroupAuthRole";
 
 function Group() {
     const {id} = useParams()
     const dispatch = useDispatch()
     const axiosInstance = getConfiguredAxis(AuthModel());
     const homeTabNumber = useSelector(state => state.config.homeTab);
-    const [loanGroup,setLoanGroup] = useState(useSelector(state => state.loanGroup.loanGroup));
+    const [loanGroupData,setLoanGroupData] = useState();
     const updateFlag = useSelector(state => state.loanGroup.updateFlag);
+
+   //other way to update data
     // const [update, setUpdate] = useState(0)
-    GetLoanGroupAxis(id)
+    // const { loanGroupData, loading, error } = GetLoanGroup(id)
+    // GetLoanGroupAxis(id)
+
+
     const updateData =  ()=>{
-        // const { data, loading, error} = AxiosPost(URLs['loanGroup'],{'loan_group_id':id})
-        axiosInstance.post(URLs['loanGroup'],{'loan_group_id':id}).then(function (response) {
-            // console.log(response?.data?.data?.loanGroup)
-            // let loanGroup = response?.data?.data?.loanGroup;
-            dispatch(setLoanGroup(response?.data?.data?.loanGroup))
-            // setUpdate(update+1)
-            // loanGroup = response?.data?.data?.loanGroup;
+        // const { data, loading, error} = AxiosPost(URLs['loanGroupData'],{'loan_group_id':id})
+        axiosInstance.post(URLs.loan_groups.view,{'loan_group_id':id}).then(function (response) {
+            setLoanGroupData(response?.data?.data?.loanGroup)
         }).catch(function (error) {
             // setErrors(UnpackErrors(error))
         }).finally(()=>{
             // setLoading(false)
         });
-        // let loanGroup = data?.data?.loanGroup;
-        // dispatch(setLoanGroup(loanGroup))
     }
     useEffect(() => {
-        // console.log(updateFlag)
+        if(loanGroupData?.clientRole) dispatch(setClientRole(loanGroupData?.clientRole))
+        if(loanGroupData) dispatch(setLoanGroup(loanGroupData))
+    }, [loanGroupData]);
+    useEffect(() => {
         updateData()
     }, [updateFlag]);
-    // useEffect(() => {
-    //     console.log('loanGroup',loanGroup)
-    // }, [loanGroup]);
+    useEffect(() => {
+        updateData()
+    }, []);
     const changeHomeTab = (tab) => {
         dispatch(setHomeTab(tab))
     }
@@ -59,15 +64,15 @@ function Group() {
 
         switch (homeTabNumber) {
             case 0:
-                return <Members loanGroup={loanGroup} />;
+                return <Members loanGroup={loanGroupData} />;
             case 1:
-                return <Loan loanGroup={loanGroup} />;
+                return <Loan loanGroup={loanGroupData} />;
             case 2:
-                return <LoanRequest loanGroup={loanGroup} />;
+                return <LoanRequest loanGroup={loanGroupData} />;
             case 3:
-                return <Transaction loanGroup={loanGroup} />;
+                return <Transaction loanGroup={loanGroupData} />;
             case 4:
-                return <ChatPage loanGroup={loanGroup} />;
+                return <ChatPage loanGroup={loanGroupData} />;
             default:
                 return <></>;
         }

@@ -14,6 +14,7 @@ import LoanSummarise from "../../../../DataManagers/LoanSummarise";
 import MakeLoan from "../../../../DataManagers/MakeLoan";
 import TerminatingLoanDialog from "./TerminatingLoanDialog";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import TerminatedPaymentList from "./Payment/TerminatedPaymentsList";
 
 function TerminatedLoanRow({lon,user,loan_group_id}) {
     const [deleteDialogOpen,setDeleteDialogOpen] = useState(false)
@@ -71,7 +72,7 @@ function TerminatedLoanRow({lon,user,loan_group_id}) {
                     </div>
                 </div>
             </div>
-            {expand?<div className="card-body p-0 "><PaymentsList loan={loan} loan_group_id={loan_group_id} /></div>:null}
+            {expand?<div className="card-body p-0 "><TerminatedPaymentList loan={loan} loan_group_id={loan_group_id} /></div>:null}
         </div>
     );
 }

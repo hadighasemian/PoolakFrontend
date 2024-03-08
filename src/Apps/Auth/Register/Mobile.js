@@ -5,6 +5,9 @@ import {useFormik} from "formik";
 import URLs from "../../../Resource/Net/URLs";
 import StatusFrame from "../../Other/StatusFrame";
 import LoadingBtn from "../../../Resource/Component/LoadingBtn";
+import UnpackErrors from "../../../Resource/Net/Error/UnpackErrors";
+import {Link} from "react-router-dom";
+import getAddress from "../../../Resource/Routing/Addresses/getAddress";
 
 function Mobile({setAuthData,setPageState}) {
     const [loading, setLoading] = useState(false);
@@ -16,20 +19,16 @@ function Mobile({setAuthData,setPageState}) {
     }
     const validate=values => {
         const errors = {};
-
         if (!values.mobile) {
             errors.mobile = 'شماره همراه را وارد  کنید.';
-        } else if (!/^\d{11}$/.test(values.mobile)) {
-            errors.mobile = 'شماره همراه 11 رقمه قربون شکلت برم من!';
-        }else if (!values.name) {
-            errors.name = 'نام را وارد کنید';
         }
-
+        if (!/^\d{11}$/.test(values.mobile)) {
+            errors.mobile = 'شماره همراه 11 رقمه قربون شکلت برم من!';
+        }
         return errors;
     }
     const formik = useFormik({
         initialValues: {
-            name:'',
             mobile:'',
         },
         validate,
@@ -37,17 +36,15 @@ function Mobile({setAuthData,setPageState}) {
             setLoading(true)
             const postData = {...values}
             // console.log(values)
-            axiosInstance.post(URLs['mobile'],postData).then(function (response) {
-                console.log(response)
+            axiosInstance.post(URLs.auth.register.mobile,postData).then(function (response) {
                 if (response?.data?.state?.success){
+                    console.log(response)
                     goToCode(response?.data?.data)
-                    // console.log(response)
-                    // next()
                     return
                 }
-                setErrors(response.data.errors);
+                setErrors(UnpackErrors(error))
             }).catch(function (error) {
-                setError(error)
+                setErrors(UnpackErrors(error))
             }).finally(()=>{
                 setLoading(false)
             });
@@ -59,25 +56,6 @@ function Mobile({setAuthData,setPageState}) {
                 <div className="row">
                     <div className='col'>
                         <form onSubmit={formik.handleSubmit}>
-                            <div className="form-group mt-2">
-                                <label htmlFor="name">نام و نام خانوادگی:</label>
-                                <input
-                                    type="text"
-                                    id="name"
-                                    name="name"
-                                    className={`form-control ${
-                                        formik.touched.name && formik.errors.name
-                                            ? 'is-invalid'
-                                            : ''
-                                    }`}
-                                    onChange={formik.handleChange}
-                                    onBlur={formik.handleBlur}
-                                    value={formik.values.name}
-                                />
-                                {formik.touched.name && formik.errors.name && (
-                                    <div className="invalid-feedback">{formik.errors.name}</div>
-                                )}
-                            </div>
                             <div className="form-group mt-2">
                                 <label htmlFor="mobile">شماره همراه:</label>
                                 <input
@@ -100,6 +78,18 @@ function Mobile({setAuthData,setPageState}) {
 
                             <div className="d-flex flex-row m-3">
                                 <LoadingBtn loading={loading}></LoadingBtn>
+                            </div>
+                            <div className="row">
+                                <Link className='text-decoration-none  m-2' to={getAddress('Login')}>
+                                    <li>
+                                        ورود.
+                                    </li>
+                                </Link>
+                                <Link className='text-decoration-none  m-2' to={getAddress('Login')}>
+                                    <li>
+                                        فراموشی رمز.
+                                    </li>
+                                </Link>
                             </div>
                         </form>
                     </div>

@@ -9,7 +9,7 @@ function CheckoutMemberDialog({open,handleClose,member}) {
     const axiosInstance = getConfiguredAxis(AuthModel());
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
-    const url=URLs['checkout_member']
+    const url=URLs.loan_groups.member.checkout
     const checkoutMember = () => {
         setLoading(true)
         axiosInstance.post(url,member).then(function (response) {

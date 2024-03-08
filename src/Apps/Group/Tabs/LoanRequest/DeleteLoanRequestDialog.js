@@ -18,7 +18,7 @@ function DeleteLoanRequestDialog({open,handleClose, loanRequest}) {
 
     const deleteLoan = () => {
         setLoading(true)
-        axiosInstance.post(URLs['delete_loan_request'],loanRequest).then(function (response) {
+        axiosInstance.post(URLs.loan_groups.loan_request.delete,loanRequest).then(function (response) {
             if (response?.data?.state?.success){
                 dispatch(setUpdateFlag());
                 handleClose()

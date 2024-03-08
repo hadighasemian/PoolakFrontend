@@ -9,7 +9,11 @@ import {useRef} from "react";
 import {digitsEnToFa} from "@persian-tools/persian-tools";
 import authModel from "../../../Resource/DB/Models/Auth/AuthModel";
 import './NavBar.css'
-import ArchitectureIcon from '@mui/icons-material/Architecture';function NavBar() {
+import ArchitectureIcon from '@mui/icons-material/Architecture';
+import DeleteIcon from "@mui/icons-material/Delete";
+import {IconButton} from "@mui/material";
+
+function NavBar() {
     const dispatch = useDispatch()
     const navigate = useNavigate();
     const closeBtn = useRef(null);
@@ -42,8 +46,8 @@ import ArchitectureIcon from '@mui/icons-material/Architecture';function NavBar(
 
     return(
         <nav className="navbar  bg-body-tertiary  m-0 p-0 ">
-            <div className="container-fluid NavBar back-prime1 p-2 shadow-lg">
-                <button className="navbar-toggler border-0" type="button" data-bs-toggle="offcanvas"
+            <div className="container-fluid NavBar back-prime1  shadow-lg">
+                <button className="navbar-toggler p-2 border-0" type="button" data-bs-toggle="offcanvas"
                         data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                     <i className="bi bi-three-dots-vertical"></i>
 
@@ -52,6 +56,12 @@ import ArchitectureIcon from '@mui/icons-material/Architecture';function NavBar(
                         {i18next.t('App_name')}
                     </span>
                 </button>
+                <IconButton aria-label="delete">
+                    <Link to={getAddress('Home')} onClick={closeOffCanvas} className="nav-link">
+                        <HomeIcon />
+                    </Link>
+                </IconButton>
+
 
                 <div className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasNavbar"
                      aria-labelledby="offcanvasNavbarLabel">
@@ -82,7 +92,7 @@ import ArchitectureIcon from '@mui/icons-material/Architecture';function NavBar(
                                 </button>
                             </li>
                             <li className="nav-item">
-                                <Link to={getAddress('Home')} onClick={closeOffCanvas} className="nav-link" href="src/Apps/Home/Layout/HomeLayout#">
+                                <Link to={getAddress('Home')} onClick={closeOffCanvas} className="nav-link">
                                     <HomeIcon className='mx-2'/>خانه
                                 </Link>
                             </li>

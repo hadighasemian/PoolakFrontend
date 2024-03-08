@@ -3,7 +3,7 @@ import URLs from "../URLs";
 import createSwrConf from "../Swr/createSwrConf";
 import getHomeGroupFromResponse from "../../../DataManagers/getHomeGroupsFromRespons";
 function GetHomeGroups() {
-    const {  response, loading, error } = useSwrPost(URLs['loan_groups_index'],
+    const {  response, loading, error } = useSwrPost(URLs.loan_groups.index,
         {}, createSwrConf(false,5000),{setData:false,checkData:false});
     let loanGroups = getHomeGroupFromResponse(response);
 

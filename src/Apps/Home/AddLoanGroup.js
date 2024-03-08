@@ -17,7 +17,7 @@ function AddLoanGroupDialog({group,open,toggleAddGroupDialog}) {
 
     const handleSubmit = async (values, { setSubmitting, setErrors }) => {
         setLoading(true)
-        axiosInstance.post(URLs['add_loan_group'],values).then(function (response) {
+        axiosInstance.post(URLs.loan_groups.add,values).then(function (response) {
             if (response?.data?.state?.success){
                 handleClose()
                 return

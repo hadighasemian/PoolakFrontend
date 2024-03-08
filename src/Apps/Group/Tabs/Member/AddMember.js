@@ -20,7 +20,7 @@ function AddMember() {
     const location = useLocation();
     const member = location.state.initValue ;
     useEffect(()=>{
-        axiosInstance.post(URLs['roles']).then(function (response) {
+        axiosInstance.post(URLs.roles.index).then(function (response) {
             if (response?.data?.state?.success){
                 setRoles(response?.data?.data?.roles)
                 return
@@ -41,7 +41,7 @@ function AddMember() {
         const errors = {};
         const isValidMobileNumber = /^\d{11}$/.test(values.mobile);
         if (!isValidMobileNumber) {
-            errors.mobile = 'MobileCode number must be a 10-digit number';
+            errors.mobile = 'Register number must be a 10-digit number';
         }
         return errors;
     }
@@ -51,7 +51,7 @@ function AddMember() {
         onSubmit: async (values, { setSubmitting, setErrors }) => {
             setLoading(true)
             const postData = {...values}
-            axiosInstance.post(URLs['add_member_group'],postData).then(function (response) {
+            axiosInstance.post(URLs.loan_groups.member.add,postData).then(function (response) {
                 if (response?.data?.state?.success){
                     goGroupHome()
                 }

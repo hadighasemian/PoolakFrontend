@@ -14,7 +14,7 @@ function DeleteTransactionDialog({open,handleClose, transaction}) {
     const dispatch = useDispatch()
     const deleteTransactions = () => {
         setLoading(true)
-        axiosInstance.post(URLs['delete_transaction'],transaction).then(function (response) {
+        axiosInstance.post(URLs.loan_groups.transactions.delete,transaction).then(function (response) {
             if (response?.data?.state?.success){
                 dispatch(setUpdateFlag());
                 handleClose()

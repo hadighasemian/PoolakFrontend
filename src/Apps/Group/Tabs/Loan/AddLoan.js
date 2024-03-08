@@ -30,7 +30,7 @@ function AddLoan(){
     const loan = location.state.initValue ;
 
     useEffect(()=>{
-        axiosInstance.post(URLs['loan_group_member'],{'loan_group_id':group_id}).then(function (response) {
+        axiosInstance.post(URLs.loan_groups.member.index,{'loan_group_id':group_id}).then(function (response) {
             if (response?.data?.state?.success){
                 setMembers(response?.data?.data?.member)
                 return
@@ -80,7 +80,7 @@ function AddLoan(){
         onSubmit: async (values, { setSubmitting, setErrors }) => {
             setLoading(true)
             const postData = {...values,loan_group_id:group_id}
-            axiosInstance.post(URLs['add_loan'],postData).then(function (response) {
+            axiosInstance.post(URLs.loan_groups.loans.add,postData).then(function (response) {
                 if (response?.data?.state?.success){
                     goGroupHome()
                     return

@@ -1,10 +1,12 @@
 import React, {useEffect, useState} from "react";
-import Mobile from "./Mobile";
-import ConfirmCode from "./ConfirmCode";
 import LoginLogo from "../Login/LoginLogo";
+import Mobile from "./Mobile";
+import Code from "./Code";
+import Pass from "./Pass";
 
 
-function MobileCode() {
+
+function Forget() {
     const [pageState,setPageState] = useState('mobile')
     const [authData,setAuthData] = useState({
         login:{},
@@ -17,14 +19,13 @@ function MobileCode() {
             case "mobile":
                 return <Mobile setAuthData={setAuthData} setPageState={setPageState}/>;
             case "code":
-                return <ConfirmCode  authData={authData} setPageState={setPageState}/>
+                return <Code  authData={authData} setPageState={setPageState}/>
+            case "pass":
+                return <Pass  authData={authData} setPageState={setPageState}/>
             default:
                 return null;
         }
     };
-    useEffect(()=>{
-        // console.log(authData)
-    },[authData])
 
     return(
         <div className="container-fluid back h-100 ">
@@ -37,4 +38,4 @@ function MobileCode() {
         </div>
     )
 }
-export default MobileCode;
+export default Forget;

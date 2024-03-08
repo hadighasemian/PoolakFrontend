@@ -10,12 +10,12 @@ import AuthModel from "../../../../Resource/DB/Models/Auth/AuthModel";
 function LoanRequest({loanGroup}) {
     const {user} = AuthModel()
     const loanRequest = {
-        id:'-1',
-        amount:1000,
-        length:1,
-        date:new Date(),
-        user_id:user.id,
-        loan_group_id:loanGroup?.id
+        id: -1,
+        amount: 1000,
+        length: 1,
+        date: new Date(),
+        user_id: user.id,
+        loan_group_id: loanGroup?.id
     }
 
 

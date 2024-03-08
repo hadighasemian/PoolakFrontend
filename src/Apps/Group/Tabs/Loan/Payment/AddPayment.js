@@ -47,7 +47,7 @@ function AddPayment(props) {
         validate,
         onSubmit: async (values, { setSubmitting, setErrors }) => {
             setLoading(true)
-            axiosInstance.post(URLs['add_payment'],values).then(function (response) {
+            axiosInstance.post(URLs.loan_groups.payments.add,values).then(function (response) {
                 if (response?.data?.state?.success){
                     back()
                     return

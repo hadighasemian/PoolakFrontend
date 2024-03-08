@@ -1,29 +1,15 @@
 import LoginLogo from "./Login/LoginLogo";
 import React, {useEffect, useState} from "react";
 import Login from "./Login/Login";
-import Mobile from "./MobileCode/Mobile";
-import ConfirmCode from "./MobileCode/ConfirmCode";
+import Mobile from "./Register/Mobile";
+import Code from "./Register/Code";
 
 function Auth() {
-    const [pageState,setPageState] = useState('login')
     const [authData,setAuthData] = useState({
         login:{},
         user:{},
     })
 
-
-    const renderPage = () => {
-        switch (pageState) {
-            case "login":
-                return <Login />;
-            case "register":
-                return <Mobile setAuthData={setAuthData} setPageState={setPageState}/>
-            case "code":
-                return <ConfirmCode authData={authData} setPageState={setPageState}/>;
-            default:
-                return null;
-        }
-    };
     useEffect(()=>{
         // console.log(authData)
     },[authData])

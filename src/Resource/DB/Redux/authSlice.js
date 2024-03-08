@@ -21,7 +21,7 @@ export const authSlice = createSlice({
             state.auth = action.payload
         },
         setClientRole: (state, action) => {
-            // console.log('action.payload',action.payload)
+            // console.log('action.payload',action)
             state.clientRole = action.payload
             // state.auth.clientRole = action.payload
         },

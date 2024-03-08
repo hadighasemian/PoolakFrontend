@@ -24,17 +24,15 @@ function AddLoanRequest(){
     const [error, setError] = useState(false);
     const [initialLoading, setInitialLoading] = useState(true);
     const [members,setMembers] =  useState([{id:'', name:''}])
-    // const [startDate,setStartDate] =  useState(new Date())
     const axiosInstance = getConfiguredAxis(AuthModel());
     const len = Array.from(Array(72 - 1 + 1).keys(), i => i + 1);
     const location = useLocation();
     const loan = location.state.initValue ;
 
     useEffect(()=>{
-        axiosInstance.post(URLs['loan_group_member'],{'loan_group_id':group_id}).then(function (response) {
+        axiosInstance.post(URLs.loan_groups.member.index,{'loan_group_id':group_id}).then(function (response) {
             if (response?.data?.state?.success){
                 setMembers(response?.data?.data?.member)
-
                 return
             }
         }).catch(function (error) {
@@ -82,9 +80,8 @@ function AddLoanRequest(){
         onSubmit: async (values, { setSubmitting, setErrors }) => {
             setLoading(true)
             const postData = {...values,loan_group_id:group_id}
-            axiosInstance.post(URLs['add_loan_request'],postData).then(function (response) {
+            axiosInstance.post(URLs.loan_groups.loan_request.add,postData).then(function (response) {
                 if (response?.data?.state?.success){
-
                     goGroupHome()
                     return
                 }
@@ -113,17 +110,19 @@ function AddLoanRequest(){
                     <div className='col pt-4'>
                         <form className='m-2' onSubmit={formik.handleSubmit}>
                             <div className="my-3">
-                                <label htmlFor="user_id" className="form-label">درخواست کننده:</label>
+                                <label htmlFor="user_id" className="form-label">درخواست کننده:
+                                    {haveAccess()}
+                                </label>
                                 <select
                                     className='form-select'
                                     id="user_id"
                                     name="user_id"
-                                    disabled={!haveAccess()}
+                                    disabled={haveAccess()?false:true}
                                     value={formik.values.user_id}
                                     onChange={changeFormikField}
                                 >
                                     <option id='user_-1' value='-1'>
-                                        یکی از افراد را انتخاب کنید
+                                        یکی از افراد را انتخاب کنید.
                                     </option>
                                     {
                                         members?.map((option) => (

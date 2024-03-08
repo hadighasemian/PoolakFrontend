@@ -22,7 +22,7 @@ function HomeGroupsRow({ loanGroup}) {
     return (
         <>
             <AddLoanGroupDialog group={loanGroup} open={open} toggleAddGroupDialog={toggleAddGroupDialog}/>
-            <DeleteGroupDialog url={URLs['delete_loan_group']} group={loanGroup} open={deleteDialogOpen} handleClose={toggleDeleteDialog}/>
+            <DeleteGroupDialog url={URLs.loan_groups.delete} group={loanGroup} open={deleteDialogOpen} handleClose={toggleDeleteDialog}/>
             <div className="card my-1" >
                     <Link to={'LoanGroup/'+loanGroup.id} className="card-header  text-decoration-none ">
                         <span className="h6 fw-bold">

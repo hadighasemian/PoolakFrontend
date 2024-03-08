@@ -14,7 +14,7 @@ function DeleteMemberDialog({open,handleClose,member}) {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState();
     const { enqueueSnackbar } = useSnackbar();
-    let url= URLs['delete_member_group']
+    let url= URLs.loan_groups.member.delete
     const dispatch = useDispatch()
     const deleteLoan = () => {
         setLoading(true)

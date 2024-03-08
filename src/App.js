@@ -19,9 +19,10 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import AddTransaction from "./Apps/Group/Tabs/Transaction/AddTransaction";
 import AddPayment from "./Apps/Group/Tabs/Loan/Payment/AddPayment";
 import Auth from "./Apps/Auth/Auth";
-import MobileCode from "./Apps/Auth/MobileCode/MobileCode";
+import Register from "./Apps/Auth/Register/Register";
 import React, {useEffect, useState} from "react";
 import AddLoanRequest from "./Apps/Group/Tabs/LoanRequest/AddLoanRequest";
+import Forget from "./Apps/Auth/Forget/Forget";
 
 
 
@@ -59,8 +60,8 @@ function App() {
                           </Route>
                           <Route path="Auth" element={<AuthLayout />} >
                               <Route index element={<Auth />} />
-                              <Route path="MobileCode/" element={<MobileCode/>} />
-                              {/*<Route path="ForgetPassword" element={<Mobile />} />*/}
+                              <Route path="Register/" element={<Register/>} />
+                              <Route path="Forget" element={<Forget />} />
                           </Route>
                           <Route path="*" element={<NoPage />} />
                       </Route>
