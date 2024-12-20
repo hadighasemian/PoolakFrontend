@@ -37,7 +37,7 @@ function Mobile({setAuthData,setPageState}) {
             const postData = {...values}
             // console.log(values)
             axiosInstance.post(URLs.auth.forget.mobile,postData).then(function (response) {
-                console.log(response)
+                // console.log(response)
                 if (response?.data?.state?.success){
                     goToCode(response?.data?.data)
                     return

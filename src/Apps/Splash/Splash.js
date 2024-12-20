@@ -26,7 +26,7 @@ function Splash() {
 
 
     return(
-        <div className="container-fluid p-0">
+        <div className="container-fluid p-0 borderr">
             <header className="row h-25">
                 <SplashLogo></SplashLogo>
             </header>

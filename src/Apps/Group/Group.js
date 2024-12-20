@@ -34,7 +34,7 @@ function Group() {
    //other way to update data
     // const [update, setUpdate] = useState(0)
     // const { loanGroupData, loading, error } = GetLoanGroup(id)
-    // GetLoanGroupAxis(id)
+    GetLoanGroupAxis(id)
 
 
     const updateData =  ()=>{

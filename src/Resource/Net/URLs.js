@@ -1,6 +1,6 @@
 export default {
-    'base':'http://127.0.0.1/loan/back/public',
-    // 'base':'http://back.poolak.salam-raya.ir',
+    // 'base':'http://127.0.0.1/loan/back/public',
+    'base':'http://back.poolak.salam-raya.ir',
     // 'base':'http://poolak.salam-raya.ir/backend',
     // 'base':'http://salam-raya.ir',
 
