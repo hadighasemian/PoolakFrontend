@@ -1,0 +1,32 @@
+@font-face {
+  font-family: sans;
+  src: url("../Resource/fonts/IRANSansWeb.woff2"); /* Path needs to be relative to public or handled by Next.js font optimization */
+}
+@font-face {
+  font-family: sansDn;
+  src: url("../Resource/fonts/IRANSansDN.ttf"); /* Path needs to be relative to public or handled by Next.js font optimization */
+}
+
+body {
+  margin: 0;
+  height: 100%;
+
+  font-family: sansDn,-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.sansFont{
+  font-family: sansDn,-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
+}
+html{
+  overflow: hidden;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}

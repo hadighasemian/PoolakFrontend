@@ -1,0 +1,4 @@
+.tab-frame{
+    height: calc(100vh - 56px); /* Adjust based on BottomNavigation height */
+    /* padding-bottom: 56px; */ /* Ensure content doesn't hide behind nav */
+}
